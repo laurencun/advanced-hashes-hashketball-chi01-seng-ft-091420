@@ -191,27 +191,12 @@ def player_stats(player_name)
  end
 end
 
-def biggest_shoe
-   game_hash.each do |team, team_dets|
-   team_dets[:players].each do |player_dets|
-     max_value = 0
-     counter = 0
-     while counter < team_dets[:players].size
-      if player_dets[:shoe] > max_value
-       max_value = player_dets[:shoe]
-       counter =+ 1
-     end
-     max_value
-    end
-   end
-  end
-  binding.pry
-end
-
 def big_shoe_rebounds
   game_hash.each do |team, team_dets|
    team_dets[:players].each do |player_dets|
-      if player_dets[:shoe] == biggest_shoe
+       biggest_shoe = 0
+      if player_dets[:shoe] > biggest_shoe
+       biggest_shoe = player_dets[:shoe]
         return player_dets[:rebounds]
    end
   end
