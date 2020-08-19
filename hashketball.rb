@@ -1,4 +1,5 @@
-# Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +127,93 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player_name)
+  game_hash.each do |team, team_dets|
+    team_dets[:players].each do |player|
+        if player[:player_name] == player_name
+          return  player[:points]
+   end
+  end
+ end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |team, team_dets|
+    team_dets[:players].each do |player|
+        if player[:player_name] == player_name
+          return  player[:shoe]
+   end
+  end
+ end
+end
+
+def team_colors(team_name)
+  game_hash.each do |team, team_dets|
+   if team_dets[:team_name].class == String
+    team_dets[:team_name].to_sym
+      if team_dets[:team_name] == team_name
+          return team_dets[:colors]
+      end
+    end
+ end
+end
+
+def team_names
+  team_names = []
+  game_hash.each do |team, team_dets|
+    #binding.pry
+    team_names.push(team_dets[:team_name])
+    #error: can't use .push or .to_a on string :(
+  #operates on game_hash to return array of team names
+  end
+  return team_names
+ end
+
+def player_numbers(team_name)
+  player_numbers = []
+  game_hash.each do |team, team_dets|
+    if team_dets[:team_name] == team_name
+      team_dets[:players].each do |player_dets|
+        player_numbers.push(player_dets[:number])
+   end
+  end
+ end
+ return player_numbers
+end
+
+def player_stats(player_name)
+  game_hash.each do |team, team_dets|
+      team_dets[:players].each do |player_dets|
+        if player_dets[:player_name] == player_name
+         return player_dets
+   end
+  end
+ end
+end
+
+def biggest_shoe
+   game_hash.each do |team, team_dets|
+   team_dets[:players].each do |player_dets|
+     max_value = 0
+     counter = 0
+     while counter < team_dets[:players].size
+      if player_dets[:shoe] > max_value
+       max_value = player_dets[:shoe]
+       counter =+ 1
+     end
+     max_value
+    end
+   end
+  end
+  binding.pry
+end
+
+def big_shoe_rebounds
+  game_hash.each do |team, team_dets|
+   team_dets[:players].each do |player_dets|
+      if player_dets[:shoe] == biggest_shoe
+        return player_dets[:rebounds]
+   end
+  end
+ end
+end
